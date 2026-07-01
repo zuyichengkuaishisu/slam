@@ -1,0 +1,36 @@
+# ROS / colcon build outputs
+build/
+install/
+log/
+compile_commands.json
+cmake-build-*/
+
+# Local debug and runtime artifacts
+.dbg/
+logs/
+*.log
+*.pid
+*.ndjson
+
+# Dataset / recording / map outputs
+rosbag/
+*.bag
+*.db3
+*.mcap
+*.pcd
+
+# Python cache
+*.pyc
+*.pyo
+__pycache__/
+.pytest_cache/
+.venv/
+
+# Editor / OS noise
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.orig
+.DS_Store

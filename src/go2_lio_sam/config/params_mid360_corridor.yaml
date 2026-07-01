@@ -1,0 +1,85 @@
+/**:
+  ros__parameters:
+
+    # CustomMsg 经桥接节点转为 PointCloud2 后订阅此话题
+    pointCloudTopic: "/livox/lidar_pc2"
+    imuTopic: "/livox/imu"
+    odomTopic: "odometry/imu"
+    gpsTopic: "odometry/gpsz"
+
+    lidarFrame: "livox_frame"
+    baselinkFrame: "base_link"
+    odometryFrame: "odom"
+    mapFrame: "map"
+
+    useImuHeadingInitialization: false
+    useGpsElevation: false
+    gpsCovThreshold: 2.0
+    poseCovThreshold: 25.0
+
+    savePCD: true
+    # 相对 $HOME，首尾须带 /（见 mapOptmization.cpp: getenv("HOME") + savePCDDirectory）
+    savePCDDirectory: "/maps/lio_sam/"
+
+    sensor: livox
+    N_SCAN: 4
+    Horizon_SCAN: 6000
+    downsampleRate: 1
+    lidarMinRange: 0.5
+    lidarMaxRange: 50.0
+
+    # Mid360 内置 IMU，雷达与 IMU 同体（与 FAST-LIO mid360_test_go2 一致）
+    imuAccNoise: 3.9939570888238808e-03
+    imuGyrNoise: 1.5636343949698187e-03
+    imuAccBiasN: 6.4356659353532566e-05
+    imuGyrBiasN: 3.5640318696367613e-05
+    imuGravity: 9.80511
+    imuRPYWeight: 0.05
+
+    # Livox IMU orientation is identity in the bag; use gravity-estimated mounting roll/pitch.
+    # Estimated from first 3s mean acceleration: roll=-15.17deg, pitch=27.69deg.
+    lidarMountRoll: -0.264681
+    lidarMountPitch: 0.483277
+    lidarMountYaw: 0.0
+
+    extrinsicTrans: [0.0, 0.0, 0.0]
+    extrinsicRot: [1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, 1.0]
+    extrinsicRPY: [1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, 1.0]
+
+    # Mid360 + 走廊低纹理：边缘特征很少，优先保留平面约束
+    edgeThreshold: 0.15
+    surfThreshold: 0.15
+    edgeFeatureMinValidNum: 0
+    surfFeatureMinValidNum: 20
+
+    odometrySurfLeafSize: 0.08
+    mappingCornerLeafSize: 0.05
+    mappingSurfLeafSize: 0.08
+
+    z_tollerance: 1000.0
+    rotation_tollerance: 1000.0
+
+    numberOfCores: 4
+    mappingProcessInterval: 0.10
+
+    # 走廊建图：更密关键帧，减少长直段漂移
+    surroundingkeyframeAddingDistThreshold: 0.4
+    surroundingkeyframeAddingAngleThreshold: 0.08
+    surroundingKeyframeDensity: 0.8
+    surroundingKeyframeSearchRadius: 20.0
+
+    loopClosureEnableFlag: true
+    loopClosureFrequency: 0.5
+    surroundingKeyframeSize: 50
+    historyKeyframeSearchRadius: 20.0
+    historyKeyframeSearchTimeDiff: 20.0
+    historyKeyframeSearchNum: 30
+    historyKeyframeFitnessScore: 0.35
+
+    globalMapVisualizationSearchRadius: 500.0
+    globalMapVisualizationPoseDensity: 5.0
+    globalMapVisualizationLeafSize: 0.5
